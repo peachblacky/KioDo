@@ -20,7 +20,16 @@ interface TrainingDao {
     fun getTrainingWithExercises(name: String): TrainingWithExercises
 
     @Insert
-    fun saveAll(vararg trainings: Training)
+    fun insertTrainings(trainings: List<Training>)
+
+    @Insert
+    fun insertExercises(exercises: List<Exercise>)
+
+    @Transaction
+    fun insertExercisesWithTrainings(trainingWithExercises: List<TrainingWithExercises>) {
+        insertExercises(trainingWithExercises.flatMap { it.exercises })
+        insertTrainings(trainingWithExercises.map { it.training })
+    }
 
     @Delete
     fun delete(training: Training)

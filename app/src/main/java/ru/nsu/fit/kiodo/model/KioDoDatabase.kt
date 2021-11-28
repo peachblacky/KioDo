@@ -10,9 +10,9 @@ import ru.nsu.fit.kiodo.model.data.training.Training
 import ru.nsu.fit.kiodo.model.data.training.TrainingWithExercises
 import ru.nsu.fit.kiodo.model.data.xref.TrainingExerciseXRef
 
-@Database(entities = [Exercise::class, ExerciseWithTrainings::class,
-                        Training::class, TrainingWithExercises::class,
-                        TrainingExerciseXRef::class],
+@Database(entities = [Exercise::class,
+                      Training::class,
+                      TrainingExerciseXRef::class],
             version = 1)
 abstract class KioDoDatabase : RoomDatabase() {
     abstract fun exerciseDao() : ExerciseDao
