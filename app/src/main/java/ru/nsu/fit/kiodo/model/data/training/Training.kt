@@ -7,6 +7,6 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "training")
 data class Training(
     @PrimaryKey val trainingName: String,
-    @ColumnInfo val restBtwExercises: Int,
+    @ColumnInfo val restBetweenExercises: Int,
     @ColumnInfo val numberCompleted: Int
 )

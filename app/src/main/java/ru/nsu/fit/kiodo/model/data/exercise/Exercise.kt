@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey
 data class Exercise(
     @PrimaryKey val exerciseName: String,
     @ColumnInfo val repeats: Int,
-    @ColumnInfo val restBtwRepeats: Int,
+    @ColumnInfo val restBetweenRepeats: Int,
     @ColumnInfo val equipment: String?,
     @ColumnInfo val description: String?,
     @ColumnInfo val numberCompleted: Int
