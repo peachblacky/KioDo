@@ -5,9 +5,7 @@ import androidx.room.RoomDatabase
 import ru.nsu.fit.kiodo.model.dao.ExerciseDao
 import ru.nsu.fit.kiodo.model.dao.TrainingDao
 import ru.nsu.fit.kiodo.model.data.exercise.Exercise
-import ru.nsu.fit.kiodo.model.data.exercise.ExerciseWithTrainings
 import ru.nsu.fit.kiodo.model.data.training.Training
-import ru.nsu.fit.kiodo.model.data.training.TrainingWithExercises
 import ru.nsu.fit.kiodo.model.data.xref.TrainingExerciseXRef
 
 @Database(entities = [Exercise::class,

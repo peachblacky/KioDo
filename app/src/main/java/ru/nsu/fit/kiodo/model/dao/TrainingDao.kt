@@ -40,7 +40,6 @@ interface TrainingDao {
         })
     }
 
-
     @Delete
     fun delete(training: Training)
 }
