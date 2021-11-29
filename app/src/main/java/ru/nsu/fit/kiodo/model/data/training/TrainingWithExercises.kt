@@ -11,8 +11,13 @@ data class TrainingWithExercises(
     @Embedded val training : Training,
     @Relation(
         parentColumn = "trainingName",
+        entity = Exercise::class,
         entityColumn = "exerciseName",
-        associateBy = Junction(TrainingExerciseXRef::class)
+        associateBy = Junction(
+            value = TrainingExerciseXRef::class,
+            parentColumn = "trainingName",
+            entityColumn = "exerciseName"
+        )
     )
     val exercises : List<Exercise>
 )
