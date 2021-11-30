@@ -1,10 +1,10 @@
-package ru.nsu.fit.kiodo.model.dao
+package ru.nsu.fit.kiodo.data.dao
 
 import androidx.room.*
-import ru.nsu.fit.kiodo.model.data.exercise.Exercise
-import ru.nsu.fit.kiodo.model.data.training.Training
-import ru.nsu.fit.kiodo.model.data.training.TrainingWithExercises
-import ru.nsu.fit.kiodo.model.data.xref.TrainingExerciseXRef
+import ru.nsu.fit.kiodo.data.model.exercise.Exercise
+import ru.nsu.fit.kiodo.data.model.training.Training
+import ru.nsu.fit.kiodo.data.model.training.TrainingWithExercises
+import ru.nsu.fit.kiodo.data.model.xref.TrainingExerciseXRef
 
 @Dao
 interface TrainingDao {

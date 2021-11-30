@@ -1,10 +1,10 @@
-package ru.nsu.fit.kiodo.model.data.training
+package ru.nsu.fit.kiodo.data.model.training
 
 import androidx.room.Embedded
 import androidx.room.Junction
 import androidx.room.Relation
-import ru.nsu.fit.kiodo.model.data.xref.TrainingExerciseXRef
-import ru.nsu.fit.kiodo.model.data.exercise.Exercise
+import ru.nsu.fit.kiodo.data.model.xref.TrainingExerciseXRef
+import ru.nsu.fit.kiodo.data.model.exercise.Exercise
 
 data class TrainingWithExercises(
     @Embedded val training : Training,

@@ -1,12 +1,12 @@
-package ru.nsu.fit.kiodo.model
+package ru.nsu.fit.kiodo.data
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import ru.nsu.fit.kiodo.model.dao.ExerciseDao
-import ru.nsu.fit.kiodo.model.dao.TrainingDao
-import ru.nsu.fit.kiodo.model.data.exercise.Exercise
-import ru.nsu.fit.kiodo.model.data.training.Training
-import ru.nsu.fit.kiodo.model.data.xref.TrainingExerciseXRef
+import ru.nsu.fit.kiodo.data.dao.ExerciseDao
+import ru.nsu.fit.kiodo.data.dao.TrainingDao
+import ru.nsu.fit.kiodo.data.model.exercise.Exercise
+import ru.nsu.fit.kiodo.data.model.training.Training
+import ru.nsu.fit.kiodo.data.model.xref.TrainingExerciseXRef
 
 @Database(entities = [Exercise::class,
                       Training::class,

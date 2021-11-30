@@ -1,4 +1,4 @@
-package ru.nsu.fit.kiodo.model.data.xref
+package ru.nsu.fit.kiodo.data.model.xref
 
 import androidx.room.Entity
 

@@ -1,4 +1,4 @@
-package ru.nsu.fit.kiodo.model.data.exercise
+package ru.nsu.fit.kiodo.data.model.exercise
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
