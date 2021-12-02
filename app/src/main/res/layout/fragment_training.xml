@@ -7,10 +7,11 @@
     tools:context=".ui.fragments.TrainingFragment">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/trainingAppBar"
+        android:id="@+id/training_app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layoutDirection="rtl"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
 
@@ -27,21 +28,68 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <ProgressBar
-        android:id="@+id/trainingPBar"
+        android:id="@+id/training_p_par"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/trainingAppBar" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/training_app_bar" />
 
-    <FrameLayout
+    <LinearLayout
+        android:id="@+id/exercise_frame"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@id/recycle_title"
+        app:layout_constraintTop_toBottomOf="@id/training_p_par"
+        app:layout_constraintVertical_weight="12">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/exercise_name"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/repeats_count"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            style="@style/Widget.MaterialComponents.CardView"
+            app:cardCornerRadius="15dp"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/next_exercise_button"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="@string/next_exercise_button_text"
+            app:cornerRadius="15dp"
+            />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/recycle_title"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:text="@string/training_up_next_title"
+        android:textAlignment="center"
+        android:elegantTextHeight="true"
+        app:layout_constraintTop_toBottomOf="@id/exercise_frame"
+        app:layout_constraintBottom_toTopOf="@id/training_screen_recycle_view"
+        app:layout_constraintVertical_weight="1"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/training_screen_recycle_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/trainingPBar" >
-        <!--todo-->
-    </FrameLayout>
-
-
-
+        app:layout_constraintTop_toBottomOf="@id/recycle_title"
+        app:layout_constraintVertical_weight="8"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

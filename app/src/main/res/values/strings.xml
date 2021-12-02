@@ -3,4 +3,6 @@
     <string name="back_button_name">Back</string>
     <string name="back_button_description">Return back button</string>
     <string name="training_screen_title">Training</string>
+    <string name="training_up_next_title">Up next</string>
+    <string name="next_exercise_button_text">Next</string>
 </resources>
