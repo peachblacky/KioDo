@@ -7,10 +7,11 @@
     tools:context=".ui.fragments.TrainingFragment">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/trainingAppBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layoutDirection="rtl">
+        android:layoutDirection="rtl"
+        app:layout_constraintTop_toTopOf="parent">
 
 
         <com.google.android.material.appbar.MaterialToolbar
@@ -24,6 +25,22 @@
         </com.google.android.material.appbar.MaterialToolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
+
+    <ProgressBar
+        android:id="@+id/trainingPBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/trainingAppBar" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/trainingPBar" >
+        <!--todo-->
+    </FrameLayout>
+
 
 
 
