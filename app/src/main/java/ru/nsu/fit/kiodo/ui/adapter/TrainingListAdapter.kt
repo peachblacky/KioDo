@@ -4,11 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ru.nsu.fit.kiodo.R
-import ru.nsu.fit.kiodo.domain.model.Training
+import ru.nsu.fit.kiodo.domain.model.TrainingModel
 
 class TrainingListAdapter : RecyclerView.Adapter<TrainingViewHolder>() {
 
-    var trainings = listOf<Training>()
+    var trainings = listOf<TrainingModel>()
     set(value) {
         field = value
         notifyDataSetChanged()

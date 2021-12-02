@@ -1,6 +1,6 @@
 package ru.nsu.fit.kiodo.domain.model
 
 //todo
-data class Training(
+data class TrainingModel(
     val name: String
 )

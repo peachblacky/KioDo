@@ -1,4 +1,4 @@
-package ru.nsu.fit.kiodo
+package ru.nsu.fit.kiodo.ui.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -20,8 +20,8 @@ class TrainingListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         binding = FragmentTrainingListBinding.inflate(inflater, container, false)
+
         return binding.root
     }
 }
