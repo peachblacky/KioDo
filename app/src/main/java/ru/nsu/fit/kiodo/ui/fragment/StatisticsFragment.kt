@@ -1,13 +1,12 @@
-package ru.nsu.fit.kiodo
+package ru.nsu.fit.kiodo.ui.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import ru.nsu.fit.kiodo.R
 import ru.nsu.fit.kiodo.databinding.FragmentTrainingListBinding
-import ru.nsu.fit.kiodo.ui.fragment.TrainingListFragment
 
 //todo
 class StatisticsFragment : Fragment() {
