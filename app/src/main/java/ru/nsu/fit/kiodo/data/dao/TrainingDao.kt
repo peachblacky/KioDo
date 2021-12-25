@@ -20,10 +20,10 @@ interface TrainingDao {
     @Query("SELECT * FROM training WHERE trainingName LIKE :name LIMIT 1")
     fun getTrainingWithExercises(name: String): TrainingWithExercises
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertTrainings(trainings: List<Training>)
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertExercises(exercises: List<Exercise>)
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
