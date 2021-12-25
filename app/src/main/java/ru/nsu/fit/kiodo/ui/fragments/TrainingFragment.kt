@@ -4,28 +4,30 @@ import android.os.Bundle
 import android.view.*
 import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
-import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import ru.nsu.fit.kiodo.R
+import ru.nsu.fit.kiodo.databinding.FragmentTrainingBinding
 
 class TrainingFragment : Fragment() {
 
-    private var progressBar : ProgressBar? = null
-
+    private lateinit var binding: FragmentTrainingBinding;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true);
+        setHasOptionsMenu(true)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
-        val view : View = inflater.inflate(R.layout.fragment_training, container, false)
-        progressBar = view.findViewById(R.id.training_p_par)
-        return view
+//        val view : View = inflater.inflate(R.layout.fragment_training, container, false)
+//        progressBar = view.findViewById(R.id.training_p_par)
+        binding = FragmentTrainingBinding.inflate(inflater, container, false)
 
+        binding.nextExerciseButton
+
+        return binding.root
     }
 
 

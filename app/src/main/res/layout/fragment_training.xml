@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.TrainingFragment">
+    tools:context=".ui.fragments.TrainingFragment"
+    android:padding="5dp">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/training_app_bar"
@@ -22,6 +23,7 @@
             android:layout_height="wrap_content"
             app:menu="@menu/upper_menu"
             app:title="@string/training_screen_title">
+<!--            android:layout_margin="-5dp">-->
 
         </com.google.android.material.appbar.MaterialToolbar>
 
