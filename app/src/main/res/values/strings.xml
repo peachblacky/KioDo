@@ -9,6 +9,7 @@
     <string name="training_screen_title">Training</string>
     <string name="training_up_next_title">Up next</string>
     <string name="next_exercise_button_text">Next</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="training_name_not_found_toast_text">Something went wrong! Try again.</string>
+    <string name="equipment_title">Equipment:</string>
+    <string name="description_title">Description:</string>
 </resources>

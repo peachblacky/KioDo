@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.TrainingFragment"
-    android:padding="5dp">
+    android:padding="5dp"
+    tools:context=".ui.fragment.TrainingFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/training_app_bar"
@@ -22,8 +22,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:menu="@menu/upper_menu"
-            app:title="@string/training_screen_title">
-<!--            android:layout_margin="-5dp">-->
+            app:title="@string/training_screen_title"
+            app:titleCentered="true">
 
         </com.google.android.material.appbar.MaterialToolbar>
 
@@ -37,53 +37,89 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/training_app_bar" />
 
-    <LinearLayout
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/exercise_frame"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@id/recycle_title"
+        app:layout_constraintBottom_toTopOf="@id/next_exercise_button"
         app:layout_constraintTop_toBottomOf="@id/training_p_par"
         app:layout_constraintVertical_weight="12">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/exercise_name"
+        <LinearLayout
+            android:id="@+id/current_exercise_layout"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="3"
-            />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/repeats_count"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="3"
-            style="@style/Widget.MaterialComponents.CardView"
-            app:cardCornerRadius="15dp"
-            />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/exercise_name"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="3" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/next_exercise_button"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:text="@string/next_exercise_button_text"
-            app:cornerRadius="15dp"
-            />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/repeats_count"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="3" />
 
-    </LinearLayout>
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/equipment_title"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="@string/equipment_title"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/equipment"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="5"
+                android:ellipsize="end"
+                android:maxLines="5"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/description_title"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="@string/description_title"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/description"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="5"
+                android:ellipsize="end"
+                android:maxLines="5"/>
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/next_exercise_button"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="@string/next_exercise_button_text"
+        app:cornerRadius="15dp"
+        app:layout_constraintBottom_toTopOf="@id/recycle_title"
+        app:layout_constraintTop_toBottomOf="@id/exercise_frame"
+        app:layout_constraintVertical_weight="2" />
+
 
     <TextView
         android:id="@+id/recycle_title"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:elegantTextHeight="true"
         android:text="@string/training_up_next_title"
         android:textAlignment="center"
-        android:elegantTextHeight="true"
-        app:layout_constraintTop_toBottomOf="@id/exercise_frame"
         app:layout_constraintBottom_toTopOf="@id/training_screen_recycle_view"
-        app:layout_constraintVertical_weight="1"
-        />
+        app:layout_constraintTop_toBottomOf="@id/next_exercise_button"
+        app:layout_constraintVertical_weight="1" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/training_screen_recycle_view"
@@ -91,7 +127,6 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/recycle_title"
-        app:layout_constraintVertical_weight="8"
-        />
+        app:layout_constraintVertical_weight="8" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

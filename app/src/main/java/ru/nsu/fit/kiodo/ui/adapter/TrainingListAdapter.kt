@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import ru.nsu.fit.kiodo.R
 import ru.nsu.fit.kiodo.domain.model.TrainingModel
 
-class TrainingListAdapter : RecyclerView.Adapter<TrainingViewHolder>() {
+class TrainingListAdapter : RecyclerView.Adapter<NextExercisesViewHolder>() {
 
     var trainings = listOf<TrainingModel>()
     set(value) {
@@ -14,13 +14,13 @@ class TrainingListAdapter : RecyclerView.Adapter<TrainingViewHolder>() {
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrainingViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NextExercisesViewHolder {
         val layout = LayoutInflater.from(parent.context).inflate(R.layout.training_item, parent)
 
-        return TrainingViewHolder(layout)
+        return NextExercisesViewHolder(layout)
     }
 
-    override fun onBindViewHolder(holder: TrainingViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: NextExercisesViewHolder, position: Int) {
         
     }
 

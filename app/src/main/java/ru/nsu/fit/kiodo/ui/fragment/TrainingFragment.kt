@@ -1,0 +1,122 @@
+package ru.nsu.fit.kiodo.ui.fragment
+
+import android.os.Bundle
+import android.view.*
+import android.widget.Toast
+import androidx.core.view.isGone
+import androidx.fragment.app.Fragment
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import ru.nsu.fit.kiodo.R
+import ru.nsu.fit.kiodo.databinding.FragmentTrainingBinding
+import ru.nsu.fit.kiodo.domain.model.ExerciseModel
+import ru.nsu.fit.kiodo.presentation.viewmodel.TrainingViewModel
+import ru.nsu.fit.kiodo.ui.adapter.NextExercisesAdapter
+
+class TrainingFragment : Fragment() {
+
+    companion object {
+        const val trainingNameKey = "TRAININGNAMEKEY"
+    }
+
+    private var _binding: FragmentTrainingBinding? = null
+    private val binding: FragmentTrainingBinding get() = _binding!!
+
+    private var trainingName: String? = null
+
+    private val adapter =
+        NextExercisesAdapter()
+    private val viewModel: TrainingViewModel by viewModel()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentTrainingBinding.inflate(inflater, container, false)
+
+        if (savedInstanceState == null) {
+            arguments?.let {
+                trainingName = it.getString(trainingNameKey)
+            }
+        } else {
+            trainingName = savedInstanceState.getString(trainingNameKey)
+        }
+
+        viewModel.exerciseCount.observe(viewLifecycleOwner) {count ->
+            binding.trainingPPar.max = count
+        }
+
+        if (trainingName != null) {
+            viewModel.load(trainingName!!)
+            binding.topAppBar.title = trainingName
+        } else {
+            Toast.makeText(
+                requireContext(),
+                getString(R.string.training_name_not_found_toast_text),
+                Toast.LENGTH_SHORT
+            ).show()
+            parentFragmentManager.popBackStack()
+        }
+
+        binding.nextExerciseButton.setOnClickListener {
+            viewModel.getNextExercise()
+        }
+
+        viewModel.exercises.observe(viewLifecycleOwner) { exercises ->
+            adapter.exercises = exercises
+        }
+
+        viewModel.currentExercise.observe(viewLifecycleOwner) {currentExercise ->
+            updateCurrentExercise(currentExercise)
+            binding.trainingPPar.incrementProgressBy(1)
+        }
+
+        return binding.root
+    }
+
+    private fun updateCurrentExercise(newExercise: ExerciseModel) {
+        binding.exerciseName.text = newExercise.exerciseName
+        binding.repeatsCount.text = newExercise.repeats.toString()
+        if(newExercise.equipment == null) {
+            binding.equipmentTitle.isGone = true
+            binding.equipment.isGone = true
+        } else {
+            binding.equipmentTitle.isGone = false
+            binding.equipment.isGone = false
+            binding.equipment.text = newExercise.equipment
+        }
+        if(newExercise.description == null) {
+            binding.descriptionTitle.isGone = true
+            binding.description.isGone = true
+        } else {
+            binding.descriptionTitle.isGone = false
+            binding.description.isGone = false
+            binding.description.text = newExercise.description
+        }
+    }
+
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.upper_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.back -> {
+                parentFragmentManager.popBackStack()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null;
+    }
+}
