@@ -10,7 +10,7 @@ import ru.nsu.fit.kiodo.R
 import ru.nsu.fit.kiodo.databinding.FragmentTrainingBinding
 import ru.nsu.fit.kiodo.domain.model.ExerciseModel
 import ru.nsu.fit.kiodo.presentation.viewmodel.TrainingViewModel
-import ru.nsu.fit.kiodo.ui.adapter.NextExercisesAdapter
+import ru.nsu.fit.kiodo.ui.adapter.ExerciseListAdapter
 
 class TrainingFragment : Fragment() {
 
@@ -23,8 +23,7 @@ class TrainingFragment : Fragment() {
 
     private var trainingName: String? = null
 
-    private val adapter =
-        NextExercisesAdapter()
+    private val adapter = ExerciseListAdapter()
     private val viewModel: TrainingViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,7 +45,7 @@ class TrainingFragment : Fragment() {
             trainingName = savedInstanceState.getString(trainingNameKey)
         }
 
-        viewModel.exerciseCount.observe(viewLifecycleOwner) {count ->
+        viewModel.exerciseCount.observe(viewLifecycleOwner) { count ->
             binding.trainingPPar.max = count
         }
 
@@ -70,7 +69,7 @@ class TrainingFragment : Fragment() {
             adapter.exercises = exercises
         }
 
-        viewModel.currentExercise.observe(viewLifecycleOwner) {currentExercise ->
+        viewModel.currentExercise.observe(viewLifecycleOwner) { currentExercise ->
             updateCurrentExercise(currentExercise)
             binding.trainingPPar.incrementProgressBy(1)
         }
@@ -81,7 +80,7 @@ class TrainingFragment : Fragment() {
     private fun updateCurrentExercise(newExercise: ExerciseModel) {
         binding.exerciseName.text = newExercise.exerciseName
         binding.repeatsCount.text = newExercise.repeats.toString()
-        if(newExercise.equipment == null) {
+        if (newExercise.equipment == null) {
             binding.equipmentTitle.isGone = true
             binding.equipment.isGone = true
         } else {
@@ -89,7 +88,7 @@ class TrainingFragment : Fragment() {
             binding.equipment.isGone = false
             binding.equipment.text = newExercise.equipment
         }
-        if(newExercise.description == null) {
+        if (newExercise.description == null) {
             binding.descriptionTitle.isGone = true
             binding.description.isGone = true
         } else {
@@ -99,6 +98,12 @@ class TrainingFragment : Fragment() {
         }
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        trainingName?.let {
+            outState.putString(trainingNameKey, it)
+        }
+    }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.upper_menu, menu)

@@ -6,7 +6,6 @@ import ru.nsu.fit.kiodo.domain.model.ExerciseModel
 class GetExercisesListUseCase(
     private val repository: TrainingRepository
 ) {
-    suspend operator fun invoke(name : String): List<ExerciseModel> {
-        return repository.getTraining(name).exercises
-    }
+    suspend operator fun invoke(name: String): List<ExerciseModel> =
+        repository.getTraining(name).exercises
 }

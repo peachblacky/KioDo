@@ -7,9 +7,11 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import ru.nsu.fit.kiodo.domain.model.ExerciseModel
 import ru.nsu.fit.kiodo.domain.usecase.GetExercisesListUseCase
+import ru.nsu.fit.kiodo.domain.usecase.IncrementExerciseNumberCompletedUseCase
 
 class TrainingViewModel(
-    private val getExercisesListUseCase: GetExercisesListUseCase
+    private val getExercisesListUseCase: GetExercisesListUseCase,
+    private val incrementExerciseNumberCompletedUseCase: IncrementExerciseNumberCompletedUseCase
 ) : ViewModel() {
 
     private val _currentExercise: MutableLiveData<ExerciseModel> = MutableLiveData()
@@ -24,6 +26,9 @@ class TrainingViewModel(
 
     fun getNextExercise() {
         val nextExercise = _exercises.value?.first()
+        viewModelScope.launch {
+            incrementExerciseNumberCompletedUseCase(nextExercise!!.exerciseName)
+        }
         _exercises.value = _exercises.value?.drop(1)
         _currentExercise.value = nextExercise
     }

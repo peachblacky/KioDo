@@ -30,6 +30,10 @@ interface ExerciseDao {
     fun insertXRef(trainingExercisesXRefs: List<TrainingExerciseXRef>)
 
     @Transaction
+    @Query("UPDATE exercise SET numberCompleted=numberCompleted+1 WHERE exerciseName = :name")
+    fun incrementNumCompleted(name: String)
+
+    @Transaction
     fun insertExercisesWithTrainings(exercisesWithTrainings: List<ExerciseWithTrainings>) {
         insertTrainings(exercisesWithTrainings.flatMap { it.trainings })
         insertExercises(exercisesWithTrainings.map { it.exercise })

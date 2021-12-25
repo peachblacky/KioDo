@@ -21,4 +21,8 @@ class ExerciseRepositoryImpl(
         )
         exerciseDao.insertExercises(listOf(ex))
     }
+
+    override suspend fun incrementNumberCompleted(name: String) {
+        exerciseDao.incrementNumCompleted(name)
+    }
 }
