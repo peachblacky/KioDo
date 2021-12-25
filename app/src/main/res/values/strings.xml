@@ -4,6 +4,14 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="trainings">Trainings</string>
     <string name="statistics">Statistics</string>
+    <string name="back_button_name">Back</string>
+    <string name="back_button_description">Return back button</string>
+    <string name="training_screen_title">Training</string>
+    <string name="training_up_next_title">Up next</string>
+    <string name="next_exercise_button_text">Next</string>
+    <string name="training_name_not_found_toast_text">Something went wrong! Try again.</string>
+    <string name="equipment_title">Equipment:</string>
+    <string name="description_title">Description:</string>
     <string name="create_your_first_training_text">Create your first training</string>
     <string name="profile">Profile</string>
     <string name="number_of_exercises">Number of exercises:</string>

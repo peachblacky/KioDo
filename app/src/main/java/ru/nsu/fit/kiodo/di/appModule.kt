@@ -13,14 +13,18 @@ import ru.nsu.fit.kiodo.data.repository.TrainingRepositoryImpl
 import ru.nsu.fit.kiodo.domain.TrainingRepository
 import ru.nsu.fit.kiodo.domain.model.TrainingModel
 import ru.nsu.fit.kiodo.domain.usecase.GetAllTrainingUseCase
+import ru.nsu.fit.kiodo.domain.usecase.GetExercisesListUseCase
+import ru.nsu.fit.kiodo.domain.usecase.IncrementExerciseNumberCompletedUseCase
 import ru.nsu.fit.kiodo.presentation.viewmodel.MainViewModel
 import ru.nsu.fit.kiodo.presentation.viewmodel.TrainingListViewModel
 import ru.nsu.fit.kiodo.ui.adapter.TrainingListAdapter
+import ru.nsu.fit.kiodo.presentation.viewmodel.TrainingViewModel
 
 val appModule = module {
 
     viewModel { TrainingListViewModel(get()) }
     viewModel { MainViewModel() }
+    viewModel { TrainingViewModel(get(), get()) }
 
     single<KioDoDatabase> {
         Room.databaseBuilder(
@@ -30,6 +34,9 @@ val appModule = module {
         )
             .build()
     }
+
+    factory { GetExercisesListUseCase(get()) }
+    factory { IncrementExerciseNumberCompletedUseCase(get()) }
 
     single { get<KioDoDatabase>(KioDoDatabase::class.java).trainingDao() }
     factory<Converter<TrainingWithExercises, TrainingModel>> { TrainingConverter() }
