@@ -25,7 +25,7 @@
         android:layout_height="match_parent"
         android:paddingHorizontal="10dp">
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/empty_training_text"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
