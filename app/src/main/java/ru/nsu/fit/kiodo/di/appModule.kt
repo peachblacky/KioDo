@@ -9,12 +9,16 @@ import ru.nsu.fit.kiodo.data.KioDoDatabase
 import ru.nsu.fit.kiodo.data.converter.Converter
 import ru.nsu.fit.kiodo.data.converter.TrainingConverter
 import ru.nsu.fit.kiodo.data.model.training.TrainingWithExercises
+import ru.nsu.fit.kiodo.data.repository.ExerciseRepositoryImpl
 import ru.nsu.fit.kiodo.data.repository.TrainingRepositoryImpl
+import ru.nsu.fit.kiodo.domain.ExerciseRepository
 import ru.nsu.fit.kiodo.domain.TrainingRepository
 import ru.nsu.fit.kiodo.domain.model.TrainingModel
 import ru.nsu.fit.kiodo.domain.usecase.GetAllTrainingUseCase
 import ru.nsu.fit.kiodo.domain.usecase.GetExercisesListUseCase
 import ru.nsu.fit.kiodo.domain.usecase.IncrementExerciseNumberCompletedUseCase
+import ru.nsu.fit.kiodo.domain.usecase.SaveExerciseUseCase
+import ru.nsu.fit.kiodo.presentation.viewmodel.ExerciseEditingViewModel
 import ru.nsu.fit.kiodo.presentation.viewmodel.MainViewModel
 import ru.nsu.fit.kiodo.presentation.viewmodel.TrainingListViewModel
 import ru.nsu.fit.kiodo.ui.adapter.TrainingListAdapter
@@ -25,6 +29,7 @@ val appModule = module {
     viewModel { TrainingListViewModel(get()) }
     viewModel { MainViewModel() }
     viewModel { TrainingViewModel(get(), get()) }
+    viewModel { ExerciseEditingViewModel(get()) }
 
     single<KioDoDatabase> {
         Room.databaseBuilder(
@@ -37,10 +42,13 @@ val appModule = module {
 
     factory { GetExercisesListUseCase(get()) }
     factory { IncrementExerciseNumberCompletedUseCase(get()) }
+    factory { SaveExerciseUseCase(get()) }
 
-    single { get<KioDoDatabase>(KioDoDatabase::class.java).trainingDao() }
+    factory { get<KioDoDatabase>(KioDoDatabase::class.java).trainingDao() }
+    factory { get<KioDoDatabase>(KioDoDatabase::class.java).exerciseDao() }
     factory<Converter<TrainingWithExercises, TrainingModel>> { TrainingConverter() }
-    single<TrainingRepository> { TrainingRepositoryImpl(get(), get()) }
+    factory<TrainingRepository> { TrainingRepositoryImpl(get(), get()) }
+    factory<ExerciseRepository> { ExerciseRepositoryImpl(get()) }
 
     factory { GetAllTrainingUseCase(get()) }
 
