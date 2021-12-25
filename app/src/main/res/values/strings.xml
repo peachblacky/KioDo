@@ -4,4 +4,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="trainings">Trainings</string>
     <string name="statistics">Statistics</string>
+    <string name="create_your_first_training_text">Create your first training</string>
+    <string name="profile">Profile</string>
+    <string name="number_of_exercises">Number of exercises:</string>
 </resources>

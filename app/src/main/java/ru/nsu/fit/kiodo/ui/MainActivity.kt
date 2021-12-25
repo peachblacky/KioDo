@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
 
 
         supportFragmentManager.beginTransaction()
-            .replace(binding.container.id, TrainingListFragment())
+            .replace(binding.mainContainer.id, TrainingListFragment())
             .commit()
     }
 }

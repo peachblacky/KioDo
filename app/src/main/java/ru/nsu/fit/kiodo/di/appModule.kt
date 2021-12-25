@@ -14,16 +14,19 @@ import ru.nsu.fit.kiodo.domain.TrainingRepository
 import ru.nsu.fit.kiodo.domain.model.TrainingModel
 import ru.nsu.fit.kiodo.domain.usecase.GetAllTrainingUseCase
 import ru.nsu.fit.kiodo.presentation.viewmodel.MainViewModel
+import ru.nsu.fit.kiodo.presentation.viewmodel.TrainingListViewModel
+import ru.nsu.fit.kiodo.ui.adapter.TrainingListAdapter
 
 val appModule = module {
 
+    viewModel { TrainingListViewModel(get()) }
     viewModel { MainViewModel() }
 
     single<KioDoDatabase> {
         Room.databaseBuilder(
             androidContext(),
             KioDoDatabase::class.java,
-            "Kio"
+            "KioDoDatabase"
         )
             .build()
     }
@@ -33,5 +36,7 @@ val appModule = module {
     single<TrainingRepository> { TrainingRepositoryImpl(get(), get()) }
 
     factory { GetAllTrainingUseCase(get()) }
+
+    factory { TrainingListAdapter() }
 
 }
