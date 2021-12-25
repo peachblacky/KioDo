@@ -15,4 +15,5 @@
     <string name="create_your_first_training_text">Create your first training</string>
     <string name="profile">Profile</string>
     <string name="number_of_exercises">Number of exercises:</string>
+    <string name="done">done</string>
 </resources>
