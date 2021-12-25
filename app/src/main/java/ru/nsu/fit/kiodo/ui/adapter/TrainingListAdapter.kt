@@ -3,7 +3,6 @@ package ru.nsu.fit.kiodo.ui.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import ru.nsu.fit.kiodo.R
 import ru.nsu.fit.kiodo.databinding.TrainingItemBinding
 import ru.nsu.fit.kiodo.domain.model.TrainingModel
 
