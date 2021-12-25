@@ -28,8 +28,8 @@ class TrainingRepositoryImpl(
             trainingDao.insertXRef(listOf(TrainingExerciseXRef(trainingName, exerciseName)))
         }
 
-    override suspend fun getAllTrainings(): List<TrainingModel> {
-        return trainingDao.getAllTrains().map { training ->
+    override suspend fun getAllTrainings(): List<TrainingModel> = withContext(Dispatchers.IO) {
+        trainingDao.getAllTrains().map { training ->
             converter.convertToO(training)
         }
     }
