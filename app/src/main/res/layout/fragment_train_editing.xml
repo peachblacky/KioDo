@@ -4,44 +4,119 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="5dp"
     tools:context=".ui.fragment.TrainingFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/train_editing_app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layoutDirection="rtl"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-
         <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/topAppBar"
-            style="@style/ThemeOverlay.MaterialComponents.Toolbar.Primary"
+            android:id="@+id/top_app_bar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:menu="@menu/upper_menu"
-            app:title="@string/training_screen_title"
-            app:titleCentered="true">
-
-        </com.google.android.material.appbar.MaterialToolbar>
+            android:layout_height="?attr/actionBarSize"
+            app:menu="@menu/back_done_top_app_bar"
+            app:navigationIcon="@drawable/ic_back_arrow" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
-<!--    <com.google.android.material.textfield.TextInputLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="0dp">-->
-<!--        -->
-<!--    </com.google.android.material.textfield.TextInputLayout>-->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/training_name_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="8dp"
+        android:paddingTop="5dp"
+        app:layout_constraintTop_toBottomOf="@id/train_editing_app_bar"
+        app:layout_constraintBottom_toTopOf="@id/rest_between_exercises_input"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_training_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/training_name_hint"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/rest_between_exercises_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="8dp"
+        android:paddingTop="5dp"
+        app:layout_constraintTop_toBottomOf="@id/training_name_input"
+        app:layout_constraintBottom_toTopOf="@id/rest_between_repeats_input"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_rest_between_exercises"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/rest_between_exercises_hint"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/rest_between_repeats_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="8dp"
+        android:paddingTop="5dp"
+        app:layout_constraintTop_toBottomOf="@id/rest_between_exercises_input"
+        app:layout_constraintBottom_toTopOf="@id/recycler_title"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_rest_between_repeats"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/rest_between_repeats_hint"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/recycler_title"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:paddingHorizontal="8dp"
+        android:paddingTop="5dp"
+        app:layout_constraintTop_toBottomOf="@id/rest_between_repeats_input"
+        app:layout_constraintBottom_toTopOf="@id/train_editing_recycler_view"
+        app:layout_constraintVertical_weight="1"
+        android:text="@string/train_editing_exercise_list"
+        android:elegantTextHeight="true"
+        android:gravity="center"
+        android:textSize="18sp"
+    />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/train_editing_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/train_editing_app_bar" />
+        android:paddingHorizontal="8dp"
+        android:paddingVertical="5dp"
+        app:layout_constraintTop_toBottomOf="@id/recycler_title"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_weight="10"
+        tools:listitem="@layout/exercise_item"
+        />
 
-
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add_exercise_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="25dp"
+        android:contentDescription="@string/add_new_exercise_to_training"
+        android:src="@drawable/ic_add"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
