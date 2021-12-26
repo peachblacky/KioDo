@@ -12,4 +12,6 @@ interface TrainingRepository {
 
     suspend fun getAllTrainings(): List<TrainingModel>
 
+    suspend fun incrementNumberCompleted(name: String)
+
 }

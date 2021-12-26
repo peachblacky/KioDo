@@ -69,6 +69,12 @@ class TrainingFragment : Fragment() {
             adapter.exercises = exercises
         }
 
+        viewModel.isFinished.observe(viewLifecycleOwner) { isFinished ->
+            if (isFinished) {
+                parentFragmentManager.popBackStack()
+            }
+        }
+
         viewModel.currentExercise.observe(viewLifecycleOwner) { currentExercise ->
             updateCurrentExercise(currentExercise)
             binding.trainingPPar.incrementProgressBy(1)

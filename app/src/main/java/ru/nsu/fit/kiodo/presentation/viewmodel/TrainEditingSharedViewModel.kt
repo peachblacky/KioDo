@@ -2,7 +2,6 @@ package ru.nsu.fit.kiodo.presentation.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import android.content.ClipData.Item
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
@@ -14,14 +13,23 @@ class TrainEditingSharedViewModel(
 ) : ViewModel() {
 
     var trainingName: String = ""
-    var restBetweenExercises : Int = 0
-    var restBetweenRepeats : Int = 0
-    private val _exercises: MutableLiveData<List<ExerciseModel>> = MutableLiveData()
-    val exercises: LiveData<List<ExerciseModel>> get() = _exercises
+    var restBetweenExercises: Int = 0
+    var restBetweenRepeats: Int = 0
+
+    private val _selectedExercises: MutableLiveData<List<ExerciseModel>> = MutableLiveData()
+    val selectedExercises: LiveData<List<ExerciseModel>> get() = _selectedExercises
+
+    private val _allExercises: MutableLiveData<List<ExerciseModel>> = MutableLiveData()
+    val allexercises: LiveData<List<ExerciseModel>> get() = _allExercises
 
     fun saveTraining() {
         viewModelScope.launch {
-            saveTrainingUseCase(trainingName, restBetweenExercises, exercises.value!!)
+            saveTrainingUseCase(trainingName, restBetweenExercises, selectedExercises.value!!)
         }
+    }
+
+    fun selectExercise(selectedExercise: ExerciseModel) {
+        _selectedExercises.value =
+            selectedExercises.value ?: emptyList<ExerciseModel>() + selectedExercise
     }
 }

@@ -26,6 +26,10 @@ interface TrainingDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertExercises(exercises: List<Exercise>)
 
+    @Transaction
+    @Query("UPDATE training SET numberCompleted=numberCompleted+1 WHERE trainingName = :name")
+    fun incrementNumCompleted(name: String)
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertXRef(trainingExercisesXRefs: List<TrainingExerciseXRef>)
 
