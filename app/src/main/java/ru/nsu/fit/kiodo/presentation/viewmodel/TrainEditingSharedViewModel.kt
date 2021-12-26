@@ -4,19 +4,21 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import ru.nsu.fit.kiodo.domain.model.ExerciseModel
+import ru.nsu.fit.kiodo.domain.usecase.CheckIfTrainingExistUseCase
 import ru.nsu.fit.kiodo.domain.usecase.GetAllExercisesUseCase
 import ru.nsu.fit.kiodo.domain.usecase.SaveTrainingUseCase
 
 class TrainEditingSharedViewModel(
     private val saveTrainingUseCase: SaveTrainingUseCase,
-    private val getAllExercisesUseCase: GetAllExercisesUseCase
+    private val getAllExercisesUseCase: GetAllExercisesUseCase,
+    private val checkIfTrainingExistUseCase: CheckIfTrainingExistUseCase
 ) : ViewModel() {
 
     var trainingName: String = ""
     var restBetweenExercises: Int = 0
-    var restBetweenRepeats: Int = 0
 
     private val _selectedExercises: MutableLiveData<List<ExerciseModel>> =
         MutableLiveData(emptyList())
@@ -28,10 +30,16 @@ class TrainEditingSharedViewModel(
     private val _isSaved = MutableLiveData(false)
     val isSaved: LiveData<Boolean> get() = _isSaved
 
+    private val _isValidated: MutableLiveData<Boolean> = MutableLiveData(true)
+    val isValidated: LiveData<Boolean> get() = _isValidated
+
     fun saveTraining() {
         viewModelScope.launch {
-            saveTrainingUseCase(trainingName, restBetweenExercises, selectedExercises.value!!)
-            _isSaved.value = true
+            validateData()
+            if(isValidated.value!!) {
+                saveTrainingUseCase(trainingName, restBetweenExercises, selectedExercises.value!!)
+                _isSaved.value = true
+            }
         }
     }
 
@@ -51,6 +59,14 @@ class TrainEditingSharedViewModel(
         _selectedExercises.value = emptyList()
         _allExercises.value = emptyList()
         _isSaved.value = false
+        _isValidated.value = true
+    }
+
+    private suspend fun validateData() {
+        _isValidated.value = selectedExercises.value!!.isNotEmpty()
+                && trainingName != ""
+                && restBetweenExercises != 0
+                && !checkIfTrainingExistUseCase(trainingName)
     }
 
 }

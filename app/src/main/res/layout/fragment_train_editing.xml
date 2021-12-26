@@ -88,7 +88,7 @@
         android:id="@+id/add_exercise_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="25dp"
+        android:layout_marginEnd="15dp"
         android:layout_marginBottom="25dp"
         android:contentDescription="@string/add_new_exercise_to_training"
         android:src="@drawable/ic_add"

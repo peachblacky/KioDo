@@ -25,7 +25,7 @@ val appModule = module {
     viewModel { TrainingListViewModel(get()) }
     viewModel { MainViewModel() }
     viewModel { TrainingViewModel(get(), get(), get()) }
-    viewModel { TrainEditingSharedViewModel(get(), get()) }
+    viewModel { TrainEditingSharedViewModel(get(), get(), get()) }
     viewModel { ExerciseEditingViewModel(get()) }
     viewModel { StatisticsViewModel(get(), get(), get()) }
 
@@ -54,6 +54,7 @@ val appModule = module {
     factory { IncrementTrainingNumberCompletedUseCase(get()) }
     factory { SaveTrainingUseCase(get()) }
     factory { SaveExerciseUseCase(get()) }
+    factory { CheckIfTrainingExistUseCase(get())}
     factory { GetFavoriteExerciseUseCase(get()) }
     factory { GetFavoriteTrainingUseCase(get()) }
     factory { GetTrainingsDoneNumberUseCase(get()) }
