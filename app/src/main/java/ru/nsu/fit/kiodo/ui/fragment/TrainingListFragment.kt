@@ -37,6 +37,7 @@ class TrainingListFragment : Fragment() {
 
     private fun initListeners() {
         with(binding) {
+            trainingRecyclerView.adapter = adapter
             newTrainingButton.setOnClickListener { navigateToTrainEditing() }
             topAppBar.setOnMenuItemClickListener { onMenuItemSelected(it) }
         }
