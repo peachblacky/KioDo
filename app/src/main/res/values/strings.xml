@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">KioDo</string>
+    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="trainings">Trainings</string>
     <string name="statistics">Statistics</string>
@@ -16,6 +17,10 @@
     <string name="profile">Profile</string>
     <string name="number_of_exercises">Number of exercises:</string>
     <string name="done">done</string>
+    <string name="rest_between_exercises_hint">Rest Between Exercises</string>
+    <string name="training_name_hint">Training Name</string>
+    <string name="add_new_exercise_to_training">Add new exercise to training</string>
+    <string name="train_editing_exercise_list">Exercises</string>
     <string name="exercise_name_hint">Exercise name</string>
     <string name="number_of_repeats_hint">Number of repeats</string>
     <string name="equipment_hint">Equipment(optional)</string>
