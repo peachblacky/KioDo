@@ -6,7 +6,7 @@ import ru.nsu.fit.kiodo.data.dao.TrainingDao
 import ru.nsu.fit.kiodo.data.converter.Converter
 import ru.nsu.fit.kiodo.data.model.training.TrainingWithExercises
 import ru.nsu.fit.kiodo.data.model.xref.TrainingExerciseXRef
-import ru.nsu.fit.kiodo.domain.TrainingRepository
+import ru.nsu.fit.kiodo.domain.repository.TrainingRepository
 import ru.nsu.fit.kiodo.domain.model.TrainingModel
 
 class TrainingRepositoryImpl(
@@ -42,4 +42,8 @@ class TrainingRepositoryImpl(
         withContext(Dispatchers.IO) {
             trainingDao.hasTraining(name)
         }
+
+    override suspend fun getFavoriteTraining(): TrainingModel = withContext(Dispatchers.IO) {
+        getTraining(trainingDao.getTrainingWithMaxCompletes().trainingName)
+    }
 }

@@ -30,4 +30,7 @@
     <string name="invalid_training_data">Correct fields and select at least one exercise to save</string>
     <string name="create_new_exercise_description">Create new exercise</string>
     <string name="equipment_card_title">Equipment:</string>
+    <string name="favorite_training">Favorite training</string>
+    <string name="favorite_exercise">Favorite exercise</string>
+    <string name="trainings_done">Trainings done</string>
 </resources>
