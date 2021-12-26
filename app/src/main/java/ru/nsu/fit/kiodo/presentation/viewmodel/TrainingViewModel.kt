@@ -17,6 +17,8 @@ class TrainingViewModel(
 ) : ViewModel() {
 
     var trainingName: String = ""
+    var isTrainingStarted = false
+        private set
 
     private val _currentExercise: MutableLiveData<ExerciseModel> = MutableLiveData()
     val currentExercise: LiveData<ExerciseModel> get() = _currentExercise
@@ -52,6 +54,7 @@ class TrainingViewModel(
         viewModelScope.launch {
             _exercises.value = getExercisesListUseCase(name)!!
             _exerciseCount.value = exercises.value?.size
+            isTrainingStarted = true
             getNextExercise()
         }
     }

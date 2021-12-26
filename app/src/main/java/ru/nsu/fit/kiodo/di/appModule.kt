@@ -27,7 +27,7 @@ val appModule = module {
     viewModel { TrainingViewModel(get(), get(), get()) }
     viewModel { TrainEditingSharedViewModel(get(), get(), get()) }
     viewModel { ExerciseEditingViewModel(get()) }
-    viewModel { StatisticsViewModel(get(), get(), get()) }
+    viewModel { StatisticsViewModel(get(), get(), get(), get()) }
 
     single<KioDoDatabase> {
         Room.databaseBuilder(
@@ -54,8 +54,9 @@ val appModule = module {
     factory { IncrementTrainingNumberCompletedUseCase(get()) }
     factory { SaveTrainingUseCase(get()) }
     factory { SaveExerciseUseCase(get()) }
-    factory { CheckIfTrainingExistUseCase(get())}
+    factory { CheckIsTrainingExistUseCase(get()) }
     factory { GetFavoriteExerciseUseCase(get()) }
     factory { GetFavoriteTrainingUseCase(get()) }
     factory { GetTrainingsDoneNumberUseCase(get()) }
+    factory { CheckIsAtLeastOneTrainingExist(get()) }
 }

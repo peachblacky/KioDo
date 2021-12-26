@@ -8,6 +8,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import ru.nsu.fit.kiodo.domain.model.ExerciseModel
 import ru.nsu.fit.kiodo.domain.model.TrainingModel
+import ru.nsu.fit.kiodo.domain.usecase.CheckIsAtLeastOneTrainingExist
 import ru.nsu.fit.kiodo.domain.usecase.GetFavoriteExerciseUseCase
 import ru.nsu.fit.kiodo.domain.usecase.GetFavoriteTrainingUseCase
 import ru.nsu.fit.kiodo.domain.usecase.GetTrainingsDoneNumberUseCase
@@ -15,7 +16,8 @@ import ru.nsu.fit.kiodo.domain.usecase.GetTrainingsDoneNumberUseCase
 class StatisticsViewModel(
     private val getFavoriteTrainingUseCase: GetFavoriteTrainingUseCase,
     private val getFavoriteExerciseUseCase: GetFavoriteExerciseUseCase,
-    private val getTrainingDoneNumberUseCase: GetTrainingsDoneNumberUseCase
+    private val getTrainingDoneNumberUseCase: GetTrainingsDoneNumberUseCase,
+    private val checkIsAtLeastOneTrainingExist: CheckIsAtLeastOneTrainingExist
 ) : ViewModel() {
 
     private val _favoriteTraining = MutableLiveData<TrainingModel>()
@@ -29,6 +31,9 @@ class StatisticsViewModel(
 
     fun loadStatistics() {
         viewModelScope.launch {
+            if (!checkIsAtLeastOneTrainingExist()) {
+                return@launch
+            }
             val favEx = async { getFavoriteExerciseUseCase() }
             val favTr = async { getFavoriteTrainingUseCase() }
             val numDone = async { getTrainingDoneNumberUseCase() }

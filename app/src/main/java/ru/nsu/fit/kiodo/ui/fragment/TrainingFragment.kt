@@ -58,7 +58,7 @@ class TrainingFragment : Fragment() {
                 getString(R.string.training_name_not_found_toast_text),
                 Toast.LENGTH_SHORT
             ).show()
-            parentFragmentManager.popBackStack()
+            navigateBack()
         }
 
         binding.nextExerciseButton.setOnClickListener {
@@ -68,6 +68,13 @@ class TrainingFragment : Fragment() {
 
         viewModel.exercises.observe(viewLifecycleOwner) { exercises ->
             adapter.exercises = exercises
+            if (exercises.isEmpty() && viewModel.isTrainingStarted) {
+                binding.nextExerciseButton.text = getString(R.string.last_exercise_button_text)
+                binding.recycleTitle.isGone = true
+            } else {
+                binding.nextExerciseButton.text = getString(R.string.training_up_next_title)
+                binding.recycleTitle.isGone = false
+            }
         }
 
         viewModel.isFinished.observe(viewLifecycleOwner) { isFinished ->
@@ -80,15 +87,19 @@ class TrainingFragment : Fragment() {
             updateCurrentExercise(currentExercise)
             binding.trainingPPar.incrementProgressBy(1)
         }
-        binding.topAppBar.setNavigationOnClickListener { parentFragmentManager.popBackStack() }
+        binding.topAppBar.setNavigationOnClickListener { navigateBack() }
 
         return binding.root
+    }
+
+    private fun navigateBack() {
+        parentFragmentManager.popBackStack()
     }
 
     private fun updateCurrentExercise(newExercise: ExerciseModel) {
         binding.exerciseName.text = newExercise.exerciseName
         binding.repeatsCount.text = newExercise.repeats.toString()
-        if (newExercise.equipment == null) {
+        if (newExercise.equipment == null || newExercise.equipment.isBlank()) {
             binding.equipmentTitle.isGone = true
             binding.equipment.isGone = true
         } else {
@@ -96,7 +107,7 @@ class TrainingFragment : Fragment() {
             binding.equipment.isGone = false
             binding.equipment.text = newExercise.equipment
         }
-        if (newExercise.description == null) {
+        if (newExercise.description == null || newExercise.description.isBlank()) {
             binding.descriptionTitle.isGone = true
             binding.description.isGone = true
         } else {
@@ -112,7 +123,6 @@ class TrainingFragment : Fragment() {
             outState.putString(trainingNameKey, it)
         }
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()

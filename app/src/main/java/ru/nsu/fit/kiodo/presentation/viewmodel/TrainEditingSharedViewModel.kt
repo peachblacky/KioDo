@@ -4,17 +4,16 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import ru.nsu.fit.kiodo.domain.model.ExerciseModel
-import ru.nsu.fit.kiodo.domain.usecase.CheckIfTrainingExistUseCase
+import ru.nsu.fit.kiodo.domain.usecase.CheckIsTrainingExistUseCase
 import ru.nsu.fit.kiodo.domain.usecase.GetAllExercisesUseCase
 import ru.nsu.fit.kiodo.domain.usecase.SaveTrainingUseCase
 
 class TrainEditingSharedViewModel(
     private val saveTrainingUseCase: SaveTrainingUseCase,
     private val getAllExercisesUseCase: GetAllExercisesUseCase,
-    private val checkIfTrainingExistUseCase: CheckIfTrainingExistUseCase
+    private val checkIfTrainingExistUseCase: CheckIsTrainingExistUseCase
 ) : ViewModel() {
 
     var trainingName: String = ""

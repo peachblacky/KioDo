@@ -43,6 +43,10 @@ class TrainingRepositoryImpl(
             trainingDao.hasTraining(name)
         }
 
+    override suspend fun hasAtLeastOneTraining(): Boolean = withContext(Dispatchers.IO) {
+        trainingDao.hasAtLeastOneTraining()
+    }
+
     override suspend fun getFavoriteTraining(): TrainingModel = withContext(Dispatchers.IO) {
         getTraining(trainingDao.getTrainingWithMaxCompletes().trainingName)
     }
