@@ -1,14 +1,13 @@
 package ru.nsu.fit.kiodo.ui.fragment
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
-import androidx.fragment.app.FragmentManager
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import ru.nsu.fit.kiodo.R
 import ru.nsu.fit.kiodo.databinding.FragmentTrainEditingBinding
@@ -53,6 +52,18 @@ class TrainEditingFragment : Fragment() {
 
         initListeners()
 
+        viewModel.isValidated.observe(viewLifecycleOwner) {isValidated ->
+            if(!isValidated) {
+                showInvalidTrainingDataToast()
+            }
+        }
+
+        viewModel.isSaved.observe(viewLifecycleOwner) {isSaved ->
+            if(isSaved) {
+                navigateBack()
+            }
+        }
+
         viewModel.selectedExercises.observe(viewLifecycleOwner) { exercises ->
             adapter.exercises = exercises
         }
@@ -94,12 +105,14 @@ class TrainEditingFragment : Fragment() {
 
     private fun saveTrainingAndReturn() {
         viewModel.saveTraining()
-        viewModel.isSaved.observe(viewLifecycleOwner) {
-            if (it) {
-                navigateBack()
-            }
-        }
     }
+
+    private fun showInvalidTrainingDataToast() =
+        Toast.makeText(
+            requireContext(),
+            getString(R.string.invalid_training_data),
+            Toast.LENGTH_SHORT
+        ).show()
 
     private fun navigateBack() {
         viewModel.clear()

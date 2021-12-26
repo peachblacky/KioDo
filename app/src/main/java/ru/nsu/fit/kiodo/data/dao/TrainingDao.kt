@@ -16,9 +16,15 @@ interface TrainingDao {
     @Query("SELECT * FROM training WHERE trainingName LIKE :name LIMIT 1")
     fun findByName(name: String): Training
 
+
+
     @Transaction
     @Query("SELECT * FROM training WHERE trainingName LIKE :name LIMIT 1")
     fun getTrainingWithExercises(name: String): TrainingWithExercises
+
+    @Transaction
+    @Query("SELECT EXISTS(SELECT * FROM training WHERE trainingName LIKE :name LIMIT 1)")
+    fun hasTraining(name: String): Boolean
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertTrainings(trainings: List<Training>)

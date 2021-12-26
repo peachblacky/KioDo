@@ -37,4 +37,9 @@ class TrainingRepositoryImpl(
     override suspend fun incrementNumberCompleted(name: String) = withContext(Dispatchers.IO) {
         trainingDao.incrementNumCompleted(name)
     }
+
+    override suspend fun hasTraining(name: String): Boolean =
+        withContext(Dispatchers.IO) {
+            trainingDao.hasTraining(name)
+        }
 }

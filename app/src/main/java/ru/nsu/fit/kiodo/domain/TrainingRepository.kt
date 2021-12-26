@@ -14,4 +14,6 @@ interface TrainingRepository {
 
     suspend fun incrementNumberCompleted(name: String)
 
+    suspend fun hasTraining(name: String) : Boolean
+
 }
