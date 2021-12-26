@@ -50,7 +50,9 @@ class TrainEditingFragment : Fragment() {
                 editTrainingName.isEnabled = false
                 addExerciseButton.isClickable = true
             }
+            trainEditingRecyclerView.adapter = adapter
         }
+
 
         initListeners();
 
