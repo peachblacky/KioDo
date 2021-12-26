@@ -44,6 +44,10 @@ interface ExerciseDao {
         })
     }
 
+    @Transaction
+    @Query("SELECT * FROM exercise WHERE exercise.numberCompleted = (SELECT MAX(exercise.numberCompleted) FROM exercise) LIMIT 1")
+    fun getExerciseWithMaxCompletes(): Exercise
+
     @Delete
     fun delete(exercise: Exercise)
 }

@@ -5,7 +5,7 @@ import kotlinx.coroutines.withContext
 import ru.nsu.fit.kiodo.data.converter.Converter
 import ru.nsu.fit.kiodo.data.dao.ExerciseDao
 import ru.nsu.fit.kiodo.data.model.exercise.Exercise
-import ru.nsu.fit.kiodo.domain.ExerciseRepository
+import ru.nsu.fit.kiodo.domain.repository.ExerciseRepository
 import ru.nsu.fit.kiodo.domain.model.ExerciseModel
 
 class ExerciseRepositoryImpl(
@@ -22,5 +22,9 @@ class ExerciseRepositoryImpl(
 
     override suspend fun getAllExercises(): List<ExerciseModel> = withContext(Dispatchers.IO) {
         exerciseDao.getAllExercises().map { converter.convertToO(it) }
+    }
+
+    override suspend fun getFavoriteExercise(): ExerciseModel = withContext(Dispatchers.IO) {
+        converter.convertToO(exerciseDao.getExerciseWithMaxCompletes())
     }
 }

@@ -1,6 +1,6 @@
 package ru.nsu.fit.kiodo.domain.usecase
 
-import ru.nsu.fit.kiodo.domain.ExerciseRepository
+import ru.nsu.fit.kiodo.domain.repository.ExerciseRepository
 
 class GetAllExercisesUseCase(
     private val repository: ExerciseRepository

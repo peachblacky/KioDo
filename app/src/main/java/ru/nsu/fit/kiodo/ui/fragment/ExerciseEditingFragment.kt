@@ -10,8 +10,6 @@ import android.widget.Toast
 import androidx.core.view.isGone
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.FragmentManager
-import io.ktor.utils.io.*
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.nsu.fit.kiodo.R
@@ -44,10 +42,12 @@ class ExerciseEditingFragment : Fragment() {
                 viewModel.exerciseName = exerciseNameEditText.text.toString()
             }
             exerciseRepeatsEditText.addTextChangedListener {
-                viewModel.numberOfRepeats = exerciseRepeatsEditText.text.toString().toInt()
+                val value = exerciseRepeatsEditText.text.toString()
+                viewModel.numberOfRepeats = if (value.isNotBlank()) value.toInt() else 0
             }
             exerciseRestEditText.addTextChangedListener {
-                viewModel.restBetweenRepeats = exerciseRestEditText.text.toString().toInt()
+                val value = exerciseRestEditText.text.toString()
+                viewModel.restBetweenRepeats = if (value.isNotBlank()) value.toInt() else 0
             }
             exerciseEquipmentEditText.addTextChangedListener {
                 viewModel.equipment = exerciseEquipmentEditText.text.toString()
@@ -70,7 +70,10 @@ class ExerciseEditingFragment : Fragment() {
     }
 
     private fun navigateToTrainEditing() {
-        parentFragmentManager.popBackStack(TrainEditingFragment.backstack, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+        parentFragmentManager.popBackStack(
+            TrainEditingFragment.backstack,
+            FragmentManager.POP_BACK_STACK_INCLUSIVE
+        )
     }
 
     private fun onMenuItemClickListener(menuItem: MenuItem): Boolean =
@@ -104,4 +107,9 @@ class ExerciseEditingFragment : Fragment() {
             getString(R.string.invalid_exercise_data),
             Toast.LENGTH_SHORT
         ).show()
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }
