@@ -38,11 +38,11 @@ class TrainEditingFragment : Fragment() {
 
         if (savedInstanceState == null) {
             arguments?.let {
-                viewModel.trainingName = it.getString(TrainingFragment.trainingNameKey).toString()
+                viewModel.trainingName = it.getString(TrainingFragment.trainingNameKey) ?: ""
             }
         } else {
             viewModel.trainingName =
-                savedInstanceState.getString(TrainingFragment.trainingNameKey).toString()
+                savedInstanceState.getString(TrainingFragment.trainingNameKey) ?: ""
         }
         with(binding) {
             if (viewModel.trainingName != "") {
@@ -71,15 +71,12 @@ class TrainEditingFragment : Fragment() {
                 }
             }
             topAppBar.setOnMenuItemClickListener { onMenuItemSelected(it) }
+            topAppBar.setNavigationOnClickListener { parentFragmentManager.popBackStack() }
         }
     }
 
     private fun onMenuItemSelected(menuItem: MenuItem): Boolean =
         when (menuItem.itemId) {
-            R.id.back -> {
-                parentFragmentManager.popBackStack()
-                true
-            }
             R.id.done -> {
                 viewModel.saveTraining()
                 true

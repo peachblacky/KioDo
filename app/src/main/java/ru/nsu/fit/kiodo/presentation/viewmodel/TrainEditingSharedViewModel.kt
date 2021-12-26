@@ -12,11 +12,6 @@ import ru.nsu.fit.kiodo.domain.usecase.SaveTrainingUseCase
 class TrainEditingSharedViewModel(
     private val saveTrainingUseCase: SaveTrainingUseCase
 ) : ViewModel() {
-    val selected = MutableLiveData<Item>()
-
-    fun select(item: Item) {
-        selected.value = item
-    }
 
     var trainingName: String = ""
     var restBetweenExercises : Int = 0
