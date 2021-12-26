@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import ru.nsu.fit.kiodo.R
@@ -26,10 +25,6 @@ class TrainEditingFragment : Fragment() {
     private val adapter = ExerciseListAdapter()
     private val viewModel: TrainEditingSharedViewModel by sharedViewModel()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,11 +33,11 @@ class TrainEditingFragment : Fragment() {
 
         if (savedInstanceState == null) {
             arguments?.let {
-                viewModel.trainingName = it.getString(TrainingFragment.trainingNameKey) ?: ""
+                viewModel.trainingName = it.getString(trainingNameKey) ?: ""
             }
         } else {
             viewModel.trainingName =
-                savedInstanceState.getString(TrainingFragment.trainingNameKey) ?: ""
+                savedInstanceState.getString(trainingNameKey) ?: ""
         }
         with(binding) {
             if (viewModel.trainingName != "") {
@@ -54,9 +49,9 @@ class TrainEditingFragment : Fragment() {
         }
 
 
-        initListeners();
+        initListeners()
 
-        viewModel.exercises.observe(viewLifecycleOwner) { exercises ->
+        viewModel.selectedExercises.observe(viewLifecycleOwner) { exercises ->
             adapter.exercises = exercises
         }
 
@@ -65,8 +60,7 @@ class TrainEditingFragment : Fragment() {
 
     private fun initListeners() {
         with(binding) {
-            //todo navigation
-//            addExerciseButton.
+            addExerciseButton.setOnClickListener { navigateToExerciseList() }
             editTrainingName.addTextChangedListener {
                 if (editTrainingName.text.toString().isNotBlank()) {
                     addExerciseButton.isClickable = true
@@ -75,6 +69,13 @@ class TrainEditingFragment : Fragment() {
             topAppBar.setOnMenuItemClickListener { onMenuItemSelected(it) }
             topAppBar.setNavigationOnClickListener { parentFragmentManager.popBackStack() }
         }
+    }
+
+    private fun navigateToExerciseList() {
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.main_container, ExerciseListFragment())
+            .addToBackStack(null)
+            .commit()
     }
 
     private fun onMenuItemSelected(menuItem: MenuItem): Boolean =
@@ -89,11 +90,11 @@ class TrainEditingFragment : Fragment() {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putString(TrainingFragment.trainingNameKey, viewModel.trainingName)
+        outState.putString(trainingNameKey, viewModel.trainingName)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null;
+        _binding = null
     }
 }

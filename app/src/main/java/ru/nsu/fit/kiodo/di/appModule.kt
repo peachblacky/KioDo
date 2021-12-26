@@ -14,11 +14,7 @@ import ru.nsu.fit.kiodo.data.repository.TrainingRepositoryImpl
 import ru.nsu.fit.kiodo.domain.ExerciseRepository
 import ru.nsu.fit.kiodo.domain.TrainingRepository
 import ru.nsu.fit.kiodo.domain.model.TrainingModel
-import ru.nsu.fit.kiodo.domain.usecase.GetAllTrainingUseCase
-import ru.nsu.fit.kiodo.domain.usecase.GetExercisesListUseCase
-import ru.nsu.fit.kiodo.domain.usecase.IncrementExerciseNumberCompletedUseCase
-import ru.nsu.fit.kiodo.domain.usecase.SaveTrainingUseCase
-import ru.nsu.fit.kiodo.domain.usecase.SaveExerciseUseCase
+import ru.nsu.fit.kiodo.domain.usecase.*
 import ru.nsu.fit.kiodo.presentation.viewmodel.ExerciseEditingViewModel
 import ru.nsu.fit.kiodo.presentation.viewmodel.MainViewModel
 import ru.nsu.fit.kiodo.presentation.viewmodel.TrainEditingSharedViewModel
@@ -30,8 +26,8 @@ val appModule = module {
 
     viewModel { TrainingListViewModel(get()) }
     viewModel { MainViewModel() }
-    viewModel { TrainingViewModel(get(), get()) }
-    viewModel { TrainEditingSharedViewModel(get())}
+    viewModel { TrainingViewModel(get(), get(), get()) }
+    viewModel { TrainEditingSharedViewModel(get()) }
     viewModel { ExerciseEditingViewModel(get()) }
 
     single<KioDoDatabase> {
@@ -45,6 +41,7 @@ val appModule = module {
 
     factory { GetExercisesListUseCase(get()) }
     factory { IncrementExerciseNumberCompletedUseCase(get()) }
+    factory { IncrementTrainingNumberCompletedUseCase(get()) }
     factory { SaveTrainingUseCase(get()) }
     factory { SaveExerciseUseCase(get()) }
 

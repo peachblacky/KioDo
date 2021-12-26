@@ -8,11 +8,15 @@ import kotlinx.coroutines.launch
 import ru.nsu.fit.kiodo.domain.model.ExerciseModel
 import ru.nsu.fit.kiodo.domain.usecase.GetExercisesListUseCase
 import ru.nsu.fit.kiodo.domain.usecase.IncrementExerciseNumberCompletedUseCase
+import ru.nsu.fit.kiodo.domain.usecase.IncrementTrainingNumberCompletedUseCase
 
 class TrainingViewModel(
     private val getExercisesListUseCase: GetExercisesListUseCase,
-    private val incrementExerciseNumberCompletedUseCase: IncrementExerciseNumberCompletedUseCase
+    private val incrementExerciseNumberCompletedUseCase: IncrementExerciseNumberCompletedUseCase,
+    private val incrementTrainingNumberCompletedUseCase: IncrementTrainingNumberCompletedUseCase
 ) : ViewModel() {
+
+    var trainingName: String = ""
 
     private val _currentExercise: MutableLiveData<ExerciseModel> = MutableLiveData()
     val currentExercise: LiveData<ExerciseModel> get() = _currentExercise
@@ -23,8 +27,18 @@ class TrainingViewModel(
     private val _exerciseCount: MutableLiveData<Int> = MutableLiveData()
     val exerciseCount: LiveData<Int> get() = _exerciseCount
 
+    private val _isFinished: MutableLiveData<Boolean> = MutableLiveData()
+    val isFinished: LiveData<Boolean> get() = _isFinished
+
 
     fun getNextExercise() {
+        if (exercises.value!!.isEmpty()) {
+            viewModelScope.launch {
+                incrementTrainingNumberCompletedUseCase(trainingName)
+                _isFinished.value = true
+            }
+            return
+        }
         val nextExercise = _exercises.value?.first()
         viewModelScope.launch {
             incrementExerciseNumberCompletedUseCase(nextExercise!!.exerciseName)
@@ -34,6 +48,7 @@ class TrainingViewModel(
     }
 
     fun load(name: String) {
+        trainingName = name
         viewModelScope.launch {
             _exercises.value = getExercisesListUseCase(name)
         }

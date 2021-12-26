@@ -33,4 +33,8 @@ class TrainingRepositoryImpl(
             converter.convertToO(training)
         }
     }
+
+    override suspend fun incrementNumberCompleted(name: String) {
+        trainingDao.incrementNumCompleted(name)
+    }
 }

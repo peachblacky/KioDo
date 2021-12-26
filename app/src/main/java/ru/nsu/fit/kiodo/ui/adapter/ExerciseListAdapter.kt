@@ -15,16 +15,15 @@ class ExerciseListAdapter : RecyclerView.Adapter<ExerciseItemViewHolder>() {
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExerciseItemViewHolder {
-        val binding = ExerciseItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ExerciseItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
         return ExerciseItemViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ExerciseItemViewHolder, position: Int) {
-        val exercise = exercises[position]
-
-        holder.bind(exercise)
+        holder.bind(exercises[position])
     }
 
-    override fun getItemCount(): Int = exercises.size
+    override fun getItemCount() = exercises.size
 }
