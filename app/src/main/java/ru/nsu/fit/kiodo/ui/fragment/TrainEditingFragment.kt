@@ -52,14 +52,14 @@ class TrainEditingFragment : Fragment() {
 
         initListeners()
 
-        viewModel.isValidated.observe(viewLifecycleOwner) {isValidated ->
-            if(!isValidated) {
+        viewModel.isValidated.observe(viewLifecycleOwner) { isValidated ->
+            if (!isValidated) {
                 showInvalidTrainingDataToast()
             }
         }
 
-        viewModel.isSaved.observe(viewLifecycleOwner) {isSaved ->
-            if(isSaved) {
+        viewModel.isSaved.observe(viewLifecycleOwner) { isSaved ->
+            if (isSaved) {
                 navigateBack()
             }
         }

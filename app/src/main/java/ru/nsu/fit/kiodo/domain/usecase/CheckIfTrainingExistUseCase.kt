@@ -1,6 +1,6 @@
 package ru.nsu.fit.kiodo.domain.usecase
 
-import ru.nsu.fit.kiodo.domain.TrainingRepository
+import ru.nsu.fit.kiodo.domain.repository.TrainingRepository
 
 class CheckIfTrainingExistUseCase(
     private val repository: TrainingRepository
