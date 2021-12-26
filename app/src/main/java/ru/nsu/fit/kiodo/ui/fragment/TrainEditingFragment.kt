@@ -33,11 +33,11 @@ class TrainEditingFragment : Fragment() {
 
         if (savedInstanceState == null) {
             arguments?.let {
-                viewModel.trainingName = it.getString(TrainingFragment.trainingNameKey) ?: ""
+                viewModel.trainingName = it.getString(trainingNameKey) ?: ""
             }
         } else {
             viewModel.trainingName =
-                savedInstanceState.getString(TrainingFragment.trainingNameKey) ?: ""
+                savedInstanceState.getString(trainingNameKey) ?: ""
         }
         with(binding) {
             if (viewModel.trainingName != "") {
@@ -90,7 +90,7 @@ class TrainEditingFragment : Fragment() {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putString(TrainingFragment.trainingNameKey, viewModel.trainingName)
+        outState.putString(trainingNameKey, viewModel.trainingName)
     }
 
     override fun onDestroyView() {
