@@ -1,4 +1,4 @@
-package ru.nsu.fit.kiodo.domain
+package ru.nsu.fit.kiodo.domain.repository
 
 import ru.nsu.fit.kiodo.domain.model.TrainingModel
 
@@ -13,5 +13,7 @@ interface TrainingRepository {
     suspend fun getAllTrainings(): List<TrainingModel>
 
     suspend fun incrementNumberCompleted(name: String)
+
+    suspend fun getFavoriteTraining(): TrainingModel
 
 }

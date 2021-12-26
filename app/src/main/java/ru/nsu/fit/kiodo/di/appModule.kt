@@ -14,17 +14,12 @@ import ru.nsu.fit.kiodo.data.model.exercise.Exercise
 import ru.nsu.fit.kiodo.data.model.training.TrainingWithExercises
 import ru.nsu.fit.kiodo.data.repository.ExerciseRepositoryImpl
 import ru.nsu.fit.kiodo.data.repository.TrainingRepositoryImpl
-import ru.nsu.fit.kiodo.domain.ExerciseRepository
-import ru.nsu.fit.kiodo.domain.TrainingRepository
+import ru.nsu.fit.kiodo.domain.repository.ExerciseRepository
+import ru.nsu.fit.kiodo.domain.repository.TrainingRepository
 import ru.nsu.fit.kiodo.domain.model.ExerciseModel
 import ru.nsu.fit.kiodo.domain.model.TrainingModel
 import ru.nsu.fit.kiodo.domain.usecase.*
-import ru.nsu.fit.kiodo.presentation.viewmodel.ExerciseEditingViewModel
-import ru.nsu.fit.kiodo.presentation.viewmodel.MainViewModel
-import ru.nsu.fit.kiodo.presentation.viewmodel.TrainEditingSharedViewModel
-import ru.nsu.fit.kiodo.presentation.viewmodel.TrainingListViewModel
-import ru.nsu.fit.kiodo.ui.adapter.TrainingListAdapter
-import ru.nsu.fit.kiodo.presentation.viewmodel.TrainingViewModel
+import ru.nsu.fit.kiodo.presentation.viewmodel.*
 
 val appModule = module {
     viewModel { TrainingListViewModel(get()) }
@@ -32,6 +27,7 @@ val appModule = module {
     viewModel { TrainingViewModel(get(), get(), get()) }
     viewModel { TrainEditingSharedViewModel(get(), get()) }
     viewModel { ExerciseEditingViewModel(get()) }
+    viewModel { StatisticsViewModel(get(), get(), get()) }
 
     single<KioDoDatabase> {
         Room.databaseBuilder(
@@ -58,4 +54,7 @@ val appModule = module {
     factory { IncrementTrainingNumberCompletedUseCase(get()) }
     factory { SaveTrainingUseCase(get()) }
     factory { SaveExerciseUseCase(get()) }
+    factory { GetFavoriteExerciseUseCase(get()) }
+    factory { GetFavoriteTrainingUseCase(get()) }
+    factory { GetTrainingsDoneNumberUseCase(get()) }
 }

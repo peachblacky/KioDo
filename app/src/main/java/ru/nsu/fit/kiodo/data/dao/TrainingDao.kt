@@ -44,6 +44,10 @@ interface TrainingDao {
         })
     }
 
+    @Transaction
+    @Query("SELECT * FROM training WHERE training.numberCompleted = (SELECT MAX(training.numberCompleted) FROM training) LIMIT 1")
+    fun getTrainingWithMaxCompletes(): Training
+
     @Delete
     fun delete(training: Training)
 }
