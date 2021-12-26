@@ -12,6 +12,7 @@
     <string name="equipment_title">Equipment:</string>
     <string name="description_title">Description:</string>
     <string name="create_your_first_training_text">Create your first training</string>
+    <string name="create_your_first_exercise_text">Create your first exercise</string>
     <string name="profile">Profile</string>
     <string name="number_of_exercises">Number of exercises:</string>
     <string name="done">done</string>
@@ -21,4 +22,6 @@
     <string name="description_hint">Description(optional)</string>
     <string name="rest_between_repeats_hint">Rest between repeats</string>
     <string name="invalid_exercise_data">Fill required fields and try again</string>
+    <string name="create_new_exercise_description">Create new exercise</string>
+    <string name="equipment_card_title">Equipment:</string>
 </resources>
