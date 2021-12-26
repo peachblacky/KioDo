@@ -23,7 +23,6 @@ import ru.nsu.fit.kiodo.presentation.viewmodel.*
 
 val appModule = module {
     viewModel { TrainingListViewModel(get()) }
-    viewModel { MainViewModel() }
     viewModel { TrainingViewModel(get(), get(), get()) }
     viewModel { TrainEditingSharedViewModel(get(), get(), get()) }
     viewModel { ExerciseEditingViewModel(get()) }
