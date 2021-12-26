@@ -7,8 +7,6 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isGone
-import com.google.android.material.tooltip.TooltipDrawable
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.nsu.fit.kiodo.R
 import ru.nsu.fit.kiodo.databinding.FragmentTrainingListBinding
@@ -20,7 +18,7 @@ class TrainingListFragment : Fragment() {
 
     private var _binding: FragmentTrainingListBinding? = null
     private val binding: FragmentTrainingListBinding get() = _binding!!
-    private val adapter: TrainingListAdapter by inject()
+    private val adapter = TrainingListAdapter { navigateToTraining(it) }
 
     private val viewModel: TrainingListViewModel by viewModel()
 
@@ -49,8 +47,12 @@ class TrainingListFragment : Fragment() {
     }
 
     private fun navigateToTrainEditing(trainingName: String? = null) {
-//        parentFragmentManager.beginTransaction()
-//            .replace(R.id.main_container, )
+        val bundle = Bundle()
+        bundle.putString(TrainEditingFragment.trainingNameKey, trainingName)
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.main_container, TrainEditingFragment::class.java, bundle)
+            .addToBackStack(null)
+            .commit()
     }
 
     private fun navigateToStatisticsScreen() {
@@ -68,4 +70,13 @@ class TrainingListFragment : Fragment() {
             }
             else -> false
         }
+
+    private fun navigateToTraining(trainingName: String) {
+        val bundle = Bundle()
+        bundle.putString(TrainingFragment.trainingNameKey, trainingName)
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.main_container, TrainingFragment::class.java, bundle)
+            .addToBackStack(null)
+            .commit()
+    }
 }

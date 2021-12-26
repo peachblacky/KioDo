@@ -22,8 +22,7 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingHorizontal="10dp">
+        android:layout_height="match_parent">
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/empty_exercise_text"
@@ -39,7 +38,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="top"
-            tools:listitem="@layout/exercise_item" />
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_exercise" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/new_exercise_button"
@@ -48,8 +48,8 @@
             android:layout_gravity="bottom|end"
             android:layout_marginHorizontal="15dp"
             android:layout_marginVertical="25dp"
-            android:src="@drawable/ic_add"
-            android:contentDescription="@string/create_new_exercise_description" />
+            android:contentDescription="@string/create_new_exercise_description"
+            android:src="@drawable/ic_add" />
     </FrameLayout>
 
 </LinearLayout>

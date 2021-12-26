@@ -2,11 +2,11 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card"
+    style="@style/ItemCard"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:clickable="true"
-    app:cardCornerRadius="10dp"
-    app:cardElevation="10dp">
+    android:clickable="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -17,6 +17,7 @@
             android:id="@+id/exercise_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textAppearance="@style/ItemTextStyle"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="@tools:sample/cities" />
@@ -27,6 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:text="@string/equipment_card_title"
+            android:textAppearance="@style/ItemTextStyle"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/exercise_name" />
 
@@ -37,10 +39,11 @@
             android:layout_marginStart="5dp"
             android:ellipsize="end"
             android:maxLines="1"
+            android:textAppearance="@style/ItemTextStyle"
             app:layout_constraintBottom_toBottomOf="@id/equipment_list_title"
             app:layout_constraintLeft_toRightOf="@id/equipment_list_title"
-            app:layout_constraintTop_toTopOf="@id/equipment_list_title"
             app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/equipment_list_title"
             tools:text="@tools:sample/lorem/random" />
 
 

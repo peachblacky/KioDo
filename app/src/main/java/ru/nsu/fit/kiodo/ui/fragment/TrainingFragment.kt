@@ -64,6 +64,7 @@ class TrainingFragment : Fragment() {
         binding.nextExerciseButton.setOnClickListener {
             viewModel.getNextExercise()
         }
+        binding.trainingScreenRecycleView.adapter = adapter
 
         viewModel.exercises.observe(viewLifecycleOwner) { exercises ->
             adapter.exercises = exercises
@@ -79,6 +80,7 @@ class TrainingFragment : Fragment() {
             updateCurrentExercise(currentExercise)
             binding.trainingPPar.incrementProgressBy(1)
         }
+        binding.topAppBar.setNavigationOnClickListener { parentFragmentManager.popBackStack() }
 
         return binding.root
     }
@@ -108,20 +110,6 @@ class TrainingFragment : Fragment() {
         super.onSaveInstanceState(outState)
         trainingName?.let {
             outState.putString(trainingNameKey, it)
-        }
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.upper_menu, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.back -> {
-                parentFragmentManager.popBackStack()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
         }
     }
 

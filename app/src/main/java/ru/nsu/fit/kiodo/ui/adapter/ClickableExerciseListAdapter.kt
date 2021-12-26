@@ -6,22 +6,24 @@ import androidx.recyclerview.widget.RecyclerView
 import ru.nsu.fit.kiodo.databinding.ItemExerciseBinding
 import ru.nsu.fit.kiodo.domain.model.ExerciseModel
 
-class ExerciseListAdapter : RecyclerView.Adapter<ExerciseItem>() {
+class ClickableExerciseListAdapter(
+    private val onClick: (ExerciseModel) -> Unit
+) : RecyclerView.Adapter<ClickableExerciseItem>() {
 
     var exercises: List<ExerciseModel> = emptyList()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
+    set(value) {
+        field = value
+        notifyDataSetChanged()
+    }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExerciseItem {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClickableExerciseItem {
         val binding =
             ItemExerciseBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
-        return ExerciseItem(binding)
+        return ClickableExerciseItem(binding, onClick)
     }
 
-    override fun onBindViewHolder(holder: ExerciseItem, position: Int) {
+    override fun onBindViewHolder(holder: ClickableExerciseItem, position: Int) {
         holder.bind(exercises[position])
     }
 

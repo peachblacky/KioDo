@@ -8,8 +8,9 @@ import android.view.ViewGroup
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import ru.nsu.fit.kiodo.R
 import ru.nsu.fit.kiodo.databinding.FragmentExerciseListBinding
+import ru.nsu.fit.kiodo.domain.model.ExerciseModel
 import ru.nsu.fit.kiodo.presentation.viewmodel.TrainEditingSharedViewModel
-import ru.nsu.fit.kiodo.ui.adapter.ExerciseListAdapter
+import ru.nsu.fit.kiodo.ui.adapter.ClickableExerciseListAdapter
 
 
 class ExerciseListFragment : Fragment() {
@@ -18,7 +19,7 @@ class ExerciseListFragment : Fragment() {
     private var _binding: FragmentExerciseListBinding? = null
     private val binding: FragmentExerciseListBinding get() = _binding!!
 
-    private val adapter = ExerciseListAdapter()
+    private val adapter = ClickableExerciseListAdapter { addExerciseToTraining(it) }
     private val viewModel: TrainEditingSharedViewModel by sharedViewModel()
 
     override fun onCreateView(
@@ -33,7 +34,8 @@ class ExerciseListFragment : Fragment() {
 
         initListeners()
 
-        viewModel.allexercises.observe(viewLifecycleOwner) { allExercises ->
+        viewModel.loadExercises()
+        viewModel.allExercises.observe(viewLifecycleOwner) { allExercises ->
             adapter.exercises = allExercises
         }
 
@@ -50,8 +52,13 @@ class ExerciseListFragment : Fragment() {
     private fun navigateToExerciseEditing() {
         parentFragmentManager.beginTransaction()
             .replace(R.id.main_container, ExerciseEditingFragment())
-            .addToBackStack(null)
+            .addToBackStack(TrainEditingFragment.backstack)
             .commit()
+    }
+
+    private fun addExerciseToTraining(exercise: ExerciseModel) {
+        viewModel.selectExercise(exercise)
+        parentFragmentManager.popBackStack()
     }
 
     override fun onDestroyView() {

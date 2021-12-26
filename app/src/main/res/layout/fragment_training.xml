@@ -10,18 +10,17 @@
         android:id="@+id/training_app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layoutDirection="rtl"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/topAppBar"
-            style="@style/ThemeOverlay.MaterialComponents.Toolbar.Primary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:menu="@menu/upper_menu"
+            app:navigationIcon="@drawable/ic_back_arrow"
             app:title="@string/training_screen_title"
+            android:clickable="true"
             app:titleCentered="true">
 
         </com.google.android.material.appbar.MaterialToolbar>
@@ -33,12 +32,13 @@
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
         android:paddingHorizontal="5dp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/training_app_bar" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/exercise_frame"
+        style="@style/ItemCard"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical"
@@ -50,50 +50,60 @@
             android:id="@+id/current_exercise_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingHorizontal="5dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingHorizontal="5dp">
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/exercise_name"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="3" />
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textAppearance="@style/HeaderTextStyle"
+                tools:text="@string/app_name" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/repeats_count"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="3" />
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textAppearance="@style/RepeatsCountTextStyle"
+                tools:text="3" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/equipment_title"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:text="@string/equipment_title"/>
+                android:layout_height="wrap_content"
+                android:text="@string/equipment_title"
+                android:textAppearance="@style/MediumTitleTextStyle" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/equipment"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="5"
+                android:autoSizeTextType="uniform"
                 android:ellipsize="end"
-                android:maxLines="5"/>
+                android:maxLines="5"
+                android:textAppearance="@style/DescriptionTextStyle"
+                tools:text="@tools:sample/lorem/random" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/description_title"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:text="@string/description_title"/>
+                android:layout_height="wrap_content"
+                android:text="@string/description_title"
+                android:textAppearance="@style/MediumTitleTextStyle" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/description"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="5"
+                android:autoSizeTextType="uniform"
                 android:ellipsize="end"
-                android:maxLines="5"/>
+                android:maxLines="5"
+                android:textAppearance="@style/DescriptionTextStyle"
+                tools:text="@tools:sample/lorem/random" />
 
         </LinearLayout>
 
@@ -103,10 +113,10 @@
         android:id="@+id/next_exercise_button"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginHorizontal="5dp"
         android:layout_weight="1"
         android:text="@string/next_exercise_button_text"
         app:cornerRadius="15dp"
-        android:layout_marginHorizontal="5dp"
         app:layout_constraintBottom_toTopOf="@id/recycle_title"
         app:layout_constraintTop_toBottomOf="@id/exercise_frame"
         app:layout_constraintVertical_weight="2" />
@@ -114,24 +124,25 @@
 
     <TextView
         android:id="@+id/recycle_title"
+        android:textSize="25sp"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:elegantTextHeight="true"
+        android:paddingHorizontal="5dp"
         android:text="@string/training_up_next_title"
         android:textAlignment="center"
-        android:paddingHorizontal="5dp"
+        android:textAppearance="@style/MediumTitleTextStyle"
         app:layout_constraintBottom_toTopOf="@id/training_screen_recycle_view"
-        app:layout_constraintTop_toBottomOf="@id/next_exercise_button"
-        app:layout_constraintVertical_weight="1" />
+        app:layout_constraintTop_toBottomOf="@id/next_exercise_button" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/training_screen_recycle_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:paddingHorizontal="5dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/recycle_title"
         app:layout_constraintVertical_weight="8"
-        tools:listitem="@layout/exercise_item"/>
+        tools:listitem="@layout/item_exercise" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

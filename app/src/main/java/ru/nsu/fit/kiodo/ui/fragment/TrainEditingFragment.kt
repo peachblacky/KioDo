@@ -1,12 +1,14 @@
 package ru.nsu.fit.kiodo.ui.fragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.FragmentManager
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import ru.nsu.fit.kiodo.R
 import ru.nsu.fit.kiodo.databinding.FragmentTrainEditingBinding
@@ -17,6 +19,7 @@ class TrainEditingFragment : Fragment() {
 
     companion object {
         const val trainingNameKey = "TRAININGNAMEKEY"
+        const val backstack = "BACK"
     }
 
     private var _binding: FragmentTrainEditingBinding? = null
@@ -43,7 +46,6 @@ class TrainEditingFragment : Fragment() {
             if (viewModel.trainingName != "") {
                 editTrainingName.setText(viewModel.trainingName)
                 editTrainingName.isEnabled = false
-                addExerciseButton.isClickable = true
             }
             trainEditingRecyclerView.adapter = adapter
         }
@@ -62,31 +64,47 @@ class TrainEditingFragment : Fragment() {
         with(binding) {
             addExerciseButton.setOnClickListener { navigateToExerciseList() }
             editTrainingName.addTextChangedListener {
-                if (editTrainingName.text.toString().isNotBlank()) {
-                    addExerciseButton.isClickable = true
-                }
+                viewModel.trainingName = editTrainingName.text.toString()
             }
             topAppBar.setOnMenuItemClickListener { onMenuItemSelected(it) }
-            topAppBar.setNavigationOnClickListener { parentFragmentManager.popBackStack() }
+            topAppBar.setNavigationOnClickListener { navigateBack() }
+            editRestBetweenExercises.addTextChangedListener {
+                val value = editRestBetweenExercises.text.toString()
+                viewModel.restBetweenExercises = if (value.isNotBlank()) value.toInt() else 0
+            }
         }
     }
 
     private fun navigateToExerciseList() {
         parentFragmentManager.beginTransaction()
             .replace(R.id.main_container, ExerciseListFragment())
-            .addToBackStack(null)
+            .addToBackStack(backstack)
             .commit()
     }
 
     private fun onMenuItemSelected(menuItem: MenuItem): Boolean =
         when (menuItem.itemId) {
             R.id.done -> {
-                viewModel.saveTraining()
+                saveTrainingAndReturn()
                 true
             }
             else -> false
         }
 
+
+    private fun saveTrainingAndReturn() {
+        viewModel.saveTraining()
+        viewModel.isSaved.observe(viewLifecycleOwner) {
+            if (it) {
+                navigateBack()
+            }
+        }
+    }
+
+    private fun navigateBack() {
+        viewModel.clear()
+        parentFragmentManager.popBackStack()
+    }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)

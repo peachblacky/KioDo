@@ -21,7 +21,7 @@ class TrainingViewModel(
     private val _currentExercise: MutableLiveData<ExerciseModel> = MutableLiveData()
     val currentExercise: LiveData<ExerciseModel> get() = _currentExercise
 
-    private val _exercises: MutableLiveData<List<ExerciseModel>> = MutableLiveData()
+    private val _exercises: MutableLiveData<List<ExerciseModel>> = MutableLiveData(emptyList())
     val exercises: LiveData<List<ExerciseModel>> get() = _exercises
 
     private val _exerciseCount: MutableLiveData<Int> = MutableLiveData()
@@ -39,9 +39,9 @@ class TrainingViewModel(
             }
             return
         }
-        val nextExercise = _exercises.value?.first()
+        val nextExercise = _exercises.value?.first()!!
         viewModelScope.launch {
-            incrementExerciseNumberCompletedUseCase(nextExercise!!.exerciseName)
+            incrementExerciseNumberCompletedUseCase(nextExercise.exerciseName)
         }
         _exercises.value = _exercises.value?.drop(1)
         _currentExercise.value = nextExercise
@@ -50,9 +50,9 @@ class TrainingViewModel(
     fun load(name: String) {
         trainingName = name
         viewModelScope.launch {
-            _exercises.value = getExercisesListUseCase(name)
+            _exercises.value = getExercisesListUseCase(name)!!
+            _exerciseCount.value = exercises.value?.size
+            getNextExercise()
         }
-        _exerciseCount.value = exercises.value?.size
-        getNextExercise()
     }
 }

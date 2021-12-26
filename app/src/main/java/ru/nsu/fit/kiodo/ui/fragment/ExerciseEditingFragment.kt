@@ -9,17 +9,23 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isGone
 import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.FragmentManager
+import io.ktor.utils.io.*
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.nsu.fit.kiodo.R
 import ru.nsu.fit.kiodo.presentation.viewmodel.ExerciseEditingViewModel
 import ru.nsu.fit.kiodo.databinding.FragmentExerciseEditingBinding
+import ru.nsu.fit.kiodo.presentation.viewmodel.TrainEditingSharedViewModel
 
 class ExerciseEditingFragment : Fragment() {
 
     private var _binding: FragmentExerciseEditingBinding? = null
     private val binding: FragmentExerciseEditingBinding get() = _binding!!
 
-    private val viewModel: ExerciseEditingViewModel by inject()
+    private val viewModel: ExerciseEditingViewModel by viewModel()
+    private val sharedViewModel: TrainEditingSharedViewModel by sharedViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -63,6 +69,10 @@ class ExerciseEditingFragment : Fragment() {
         parentFragmentManager.popBackStack()
     }
 
+    private fun navigateToTrainEditing() {
+        parentFragmentManager.popBackStack(TrainEditingFragment.backstack, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+    }
+
     private fun onMenuItemClickListener(menuItem: MenuItem): Boolean =
         when (menuItem.itemId) {
             R.id.done -> {
@@ -74,10 +84,11 @@ class ExerciseEditingFragment : Fragment() {
 
     private fun saveExercise() {
         if (viewModel.saveExercise()) {
+            sharedViewModel.selectExercise(viewModel.getExercise())
             binding.progressCircular.isGone = false
             viewModel.isSaved.observe(viewLifecycleOwner) {
                 if (it) {
-                    navigateBack()
+                    navigateToTrainEditing()
                 } else {
                     showInvalidExerciseDataToast()
                 }

@@ -35,7 +35,8 @@
                 android:id="@+id/exercise_name_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="@string/exercise_name_hint" />
+                android:hint="@string/exercise_name_hint"
+                android:maxLines="1" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -51,7 +52,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="@string/number_of_repeats_hint"
-                android:inputType="number" />
+                android:inputType="number"
+                android:maxLength="5"
+                android:maxLines="1" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -67,7 +70,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="@string/rest_between_repeats_hint"
-                android:inputType="number" />
+                android:inputType="number"
+                android:maxLength="5" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -110,7 +114,7 @@
         android:id="@+id/progress_circular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        android:visibility="gone" />
 
 </FrameLayout>

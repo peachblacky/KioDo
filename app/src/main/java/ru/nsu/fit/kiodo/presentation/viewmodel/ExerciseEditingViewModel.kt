@@ -26,20 +26,23 @@ class ExerciseEditingViewModel(
         }
         viewModelScope.launch {
             saveExerciseUseCase(
-                ExerciseModel(
-                    exerciseName,
-                    numberOfRepeats,
-                    restBetweenRepeats,
-                    equipment,
-                    description,
-                    0
-                )
+                getExercise()
             )
             _isSaved.value = true
         }
 
         return true
     }
+
+    fun getExercise(): ExerciseModel =
+        ExerciseModel(
+            exerciseName,
+            numberOfRepeats,
+            restBetweenRepeats,
+            equipment,
+            description,
+            0
+        )
 
     private fun validateData() =
         exerciseName.isNotBlank() && numberOfRepeats != 0 && restBetweenRepeats != 0
