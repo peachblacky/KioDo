@@ -72,7 +72,7 @@ class TrainingFragment : Fragment() {
                 binding.nextExerciseButton.text = getString(R.string.last_exercise_button_text)
                 binding.recycleTitle.isGone = true
             } else {
-                binding.nextExerciseButton.text = getString(R.string.training_up_next_title)
+                binding.nextExerciseButton.text = getString(R.string.next_exercise_button_text)
                 binding.recycleTitle.isGone = false
             }
         }
